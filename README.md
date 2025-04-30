@@ -1,7 +1,8 @@
-# Bolt for Python Custom Step Template
+# Bolt for Python Custom Step with Builder Context
 
-This is a Bolt for Python template app used to build custom steps for use in
-[Workflow Builder](https://api.slack.com/start#workflow-builder).
+This is a Bolt for Python app used to build custom steps for use in
+[Workflow Builder](https://api.slack.com/start#workflow-builder) with the user
+context of the person building a workflow.
 
 ## Setup
 
@@ -20,52 +21,14 @@ tooling, and resources created to help developers build and grow.
 
 ### Create a Slack App
 
-1. Open [https://api.slack.com/apps/new](https://api.slack.com/apps/new) and
-   choose "From an app manifest"
+1. Clone this repository
 2. Choose the workspace you want to install the application to
-3. Copy the contents of [manifest.json](./manifest.json) into the text box that
-   says `*Paste your manifest code here*` (within the JSON tab) and click _Next_
-4. Review the configuration and click _Create_
-5. Click _Install_ button and _Allow_ on the screen that follows. You'll then be
-   redirected to the App Settings dashboard.
-
-### Environment Variables
-
-Before you can run the app, you'll need to store some environment variables.
-
-1. Open your apps setting page from this list, click **OAuth & Permissions** in
-   the left hand menu, then copy the Bot User OAuth Token. You will store this
-   in your environment as `SLACK_BOT_TOKEN`.
-2. Click **Basic Information** from the left hand menu and follow the steps in
-   the App-Level Tokens section to create an app-level token with the
-   `connections:write` scope. Copy this token. You will store this in your
-   environment as `SLACK_APP_TOKEN`.
-
-```zsh
-# Replace with your app token and bot token
-export SLACK_BOT_TOKEN=<your-bot-token>
-export SLACK_APP_TOKEN=<your-app-token>
-```
-
-### Local Project
-
-```zsh
-# Clone this project onto your machine
-git clone https://github.com/slack-samples/bolt-python-custom-step-template.git
-
-# Change into this project directory
-cd bolt-python-custom-step-template
-
-# Setup your python virtual environment
-python3 -m venv .venv
-source .venv/bin/activate
-
-# Install the dependencies
-pip3 install -r requirements.txt
-
-# Start your local server
-python3 app.py
-```
+3. Use the Slack CLI to create an instance to the app `slack init`
+4. Install the dependencies
+   1. python3 -m venv .venv
+   2. source .venv/bin/activate
+   3. pip install -r requirements.txt
+5. Use `slack run` to start the application
 
 ### Linting
 

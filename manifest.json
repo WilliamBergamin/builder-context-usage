@@ -1,6 +1,6 @@
 {
   "display_information": {
-    "name": "Bolt Custom Step"
+    "name": "Builder Context Usage"
   },
   "features": {
     "app_home": {
@@ -9,14 +9,14 @@
       "messages_tab_read_only_enabled": true
     },
     "bot_user": {
-      "display_name": "Bolt Custom Step",
+      "display_name": "Builder Context Usage",
       "always_online": true
     }
   },
   "oauth_config": {
     "scopes": {
       "bot": [
-        "chat:write"
+        "users:read"
       ]
     }
   },
@@ -36,52 +36,50 @@
     "function_runtime": "remote"
   },
   "functions": {
-    "behavior_options": {
-      "title": "Behavior options",
-      "description": "Get the button behavior options",
-      "input_parameters": {},
+    "authorized_actions": {
+      "title": "Actions",
+      "description": "Get the authorized actions",
+      "input_parameters": {
+        "builder": {
+          "type": "slack#/types/user_context",
+          "title": "builder",
+          "description": "The user context of the builder",
+          "is_required": true
+        }
+      },
       "output_parameters": {
         "options": {
           "type": "slack#/types/options_select",
           "title": "Options",
-          "description": "The available button behavior options for the app",
-          "is_required": true,
-          "name": "options"
+          "description": "The available actions for that user",
+          "is_required": true
         }
       }
     },
-    "sample_step": {
-      "title": "Sample step",
-      "description": "Runs sample step",
+    "select_authorized_action": {
+      "title": "Select and authorized action",
+      "description": "The builder must select a action from their list of authorized actions",
       "input_parameters": {
-        "user_id": {
-          "type": "slack#/types/user_id",
-          "title": "User",
-          "description": "Message recipient",
-          "is_required": true,
-          "hint": "Select a user in the workspace",
-          "name": "user_id"
-        },
-        "button_behavior": {
+        "action": {
           "type": "string",
-          "title": "Button behavior",
-          "description": "Action of the button",
+          "title": "Action",
+          "description": "Select an authorized action",
           "is_required": true,
-          "hint": "Decide the message sent with the button",
-          "name": "button_behavior",
           "dynamic_options": {
-            "function": "#/functions/behavior_options",
-            "inputs": {}
+            "function": "#/functions/authorized_actions",
+            "inputs": {
+              "builder": {
+                "value": "{{client.builder_context}}"
+              }
+            }
           }
         }
       },
       "output_parameters": {
-        "user_id": {
-          "type": "slack#/types/user_id",
-          "title": "User",
-          "description": "User that completed the step",
-          "is_required": true,
-          "name": "user_id"
+        "selected_action": {
+          "type": "string",
+          "title": "Action",
+          "description": "Selected authorized action by the builder"
         }
       }
     }
