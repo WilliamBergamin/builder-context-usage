@@ -25,9 +25,9 @@ tooling, and resources created to help developers build and grow.
 2. Choose the workspace you want to install the application to
 3. Use the Slack CLI to create an instance to the app `slack init`
 4. Install the dependencies
-   1. python3 -m venv .venv
-   2. source .venv/bin/activate
-   3. pip install -r requirements.txt
+   1. `python3 -m venv .venv`
+   2. `source .venv/bin/activate`
+   3. `pip install -r requirements.txt`
 5. Use `slack run` to start the application
 
 ### Linting
